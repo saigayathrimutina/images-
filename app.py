@@ -7,9 +7,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Load Stable Diffusion model
 model_id = "runwayml/stable-diffusion-v1-5"
+
 pipe = StableDiffusionPipeline.from_pretrained(
     model_id,
-    torch_dtype=torch.float16 if device == "cuda" else torch.float32
+    torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+    safety_checker=None,  # Optional: disables safety checker to prevent errors
 ).to(device)
 
 # Function to generate image from text prompt
